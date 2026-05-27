@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>缔智元科技 DigiMeta · 让每一次交互都拥有"人"的温度</title>
+<meta name="description" content="缔智元科技（北京）—— 企业级 AI 数字人解决方案提供商。" />
+<link rel="stylesheet" href="styles-light.css" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ========== 鼠标光晕（保留原生光标） ========== -->
+<div class="cursor-aura"></div>
+
+<!-- ========== 浮动装饰 Blob 背景 ========== -->
+<div class="bg-blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<!-- ========== 导航栏 ========== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index-light.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="14" stroke="url(#g1)" stroke-width="2.5"/>
+          <circle cx="16" cy="16" r="6" fill="url(#g1)"/>
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="32" y2="32">
+              <stop offset="0" stop-color="#5b8def"/>
+              <stop offset="1" stop-color="#a855f7"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span>DigiMeta</span>
+        <small>缔智元</small>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#hero" class="active">首页</a></li>
+      <li><a href="#capabilities">核心能力</a></li>
+      <li><a href="#scenarios">应用场景</a></li>
+      <li><a href="cases.html">行业案例</a></li>
+      <li><a href="about.html">关于我们</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#contact" class="nav-link-secondary">联系我们</a>
+      <a href="#contact" class="cta-btn">
+        <span>预约演示</span>
+        <span class="cta-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== Hero 首屏 · 大蒙版照片风格 ========== -->
+<section class="hero" id="hero">
+
+  <div class="hero-decor">
+    <svg class="deco-line" viewBox="0 0 600 600" fill="none">
+      <circle cx="300" cy="300" r="280" stroke="url(#lg1)" stroke-width="1" stroke-dasharray="4 8" opacity="0.4"/>
+      <circle cx="300" cy="300" r="200" stroke="url(#lg1)" stroke-width="1" stroke-dasharray="3 6" opacity="0.3"/>
+      <defs>
+        <linearGradient id="lg1" x1="0" y1="0" x2="600" y2="600">
+          <stop offset="0" stop-color="#5b8def"/>
+          <stop offset="1" stop-color="#ec4899"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="hero-inner">
+
+    <!-- 左侧文案 -->
+    <div class="hero-text">
+      <div class="hero-pill">
+        <span class="pill-dot"></span>
+        <span>Next-Gen Digital Human Platform</span>
+      </div>
+
+      <h1 class="hero-title">
+        让每一次<span class="text-grad">交互</span><br/>
+        都拥有"人"的<span class="text-grad-2">温度</span>
+      </h1>
+
+      <p class="hero-sub">
+        我们为企业打造具备真实感、可对话、可交互的 AI 数字人，<br/>
+        重新定义品牌与用户之间的连接方式。
+      </p>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          <span>开启合作</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="#capabilities" class="btn-ghost">
+          <span class="play-circle">▶</span>
+          <span>了解能力</span>
+        </a>
+      </div>
+
+      <!-- 客户/小信息卡 -->
+      <div class="hero-meta">
+        <div class="meta-avatars">
+          <!-- 这里添加图片：客户头像 ×4，建议 80×80 圆形 -->
+          <div class="avatar">客1</div>
+          <div class="avatar">客2</div>
+          <div class="avatar">客3</div>
+          <div class="avatar">客4</div>
+        </div>
+        <div class="meta-text">
+          <strong>200+ 企业客户</strong>
+          <span>选择缔智元的数字人解决方案</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧：Blob 蒙版大照片 + 漂浮元素 -->
+    <div class="hero-visual">
+
+      <!-- 主蒙版大照片区域 -->
+      <div class="blob-photo-wrap">
+        <!-- SVG blob 蒙版 -->
+        <svg width="0" height="0" style="position:absolute">
+          <defs>
+            <clipPath id="blob-mask" clipPathUnits="objectBoundingBox">
+              <path d="M0.5,0.02 C0.72,0.02 0.92,0.12 0.97,0.32 C1.02,0.5 0.95,0.7 0.82,0.84 C0.7,0.96 0.52,1 0.36,0.96 C0.18,0.92 0.05,0.78 0.02,0.6 C-0.01,0.42 0.04,0.22 0.18,0.1 C0.28,0.04 0.4,0.02 0.5,0.02 Z"/>
+            </clipPath>
+          </defs>
+        </svg>
+
+        <div class="blob-photo">
+          <!-- 这里添加图片：Hero 主形象大照片（建议为人物/数字人形象，1200×1200，将被蒙版裁切为有机形状） -->
+          <div class="photo-placeholder">
+            <div class="ph-circle">
+              <span class="ph-icon">◈</span>
+              <span class="ph-title">这里添加图片</span>
+              <span class="ph-hint">数字人主形象 / 团队大照片<br/>建议 1200×1200，无需抠图</span>
+            </div>
+          </div>
+          <div class="photo-glow"></div>
+        </div>
+
+        <!-- 漂浮信息卡片 ×4 -->
+        <div class="float-card card-1">
+          <div class="fc-icon" style="background: linear-gradient(135deg, #6ee7b7, #3b82f6)">●</div>
+          <div class="fc-text">
+            <strong>实时渲染</strong>
+            <span>30ms 低延迟</span>
+          </div>
+        </div>
+
+        <div class="float-card card-2">
+          <div class="fc-icon" style="background: linear-gradient(135deg, #fda4af, #f43f5e)">♥</div>
+          <div class="fc-text">
+            <strong>情感感知</strong>
+            <span>识别用户情绪</span>
+          </div>
+        </div>
+
+        <div class="float-card card-3">
+          <div class="fc-icon" style="background: linear-gradient(135deg, #c4b5fd, #8b5cf6)">⊕</div>
+          <div class="fc-text">
+            <strong>多模态交互</strong>
+            <span>语音+表情+动作</span>
+          </div>
+        </div>
+
+        <div class="float-tag tag-1">FLAGSHIP</div>
+        <div class="float-tag tag-2">AI · 2026</div>
+
+        <!-- 装饰小球 -->
+        <div class="orbit-dot dot-a"></div>
+        <div class="orbit-dot dot-b"></div>
+        <div class="orbit-dot dot-c"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 滚动提示 -->
+  <div class="scroll-hint">
+    <div class="mouse-ico">
+      <span class="wheel"></span>
+    </div>
+    <span>向下滚动</span>
+  </div>
+</section>
+
+<!-- ========== 客户Logo 滚动 ========== -->
+<section class="trust">
+  <p class="trust-label">来自各行业的领先企业 · 选择缔智元</p>
+  <div class="logo-marquee">
+    <div class="logo-track">
+      <!-- 这里添加图片：客户Logo ×8（建议深灰色单色版本 PNG，统一高度 36px） -->
+      <div class="client-logo">这里添加Logo 1</div>
+      <div class="client-logo">这里添加Logo 2</div>
+      <div class="client-logo">这里添加Logo 3</div>
+      <div class="client-logo">这里添加Logo 4</div>
+      <div class="client-logo">这里添加Logo 5</div>
+      <div class="client-logo">这里添加Logo 6</div>
+      <div class="client-logo">这里添加Logo 7</div>
+      <div class="client-logo">这里添加Logo 8</div>
+      <!-- 副本 -->
+      <div class="client-logo">这里添加Logo 1</div>
+      <div class="client-logo">这里添加Logo 2</div>
+      <div class="client-logo">这里添加Logo 3</div>
+      <div class="client-logo">这里添加Logo 4</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 核心能力 ========== -->
+<section class="capabilities" id="capabilities">
+
+  <div class="section-head reveal">
+    <span class="eyebrow">
+      <span class="eyebrow-line"></span>
+      CORE CAPABILITIES · 核心能力
+    </span>
+    <h2>定义企业级数字人的<br/><span class="text-grad">下一代标准</span></h2>
+    <p class="section-sub">融合多项前沿 AI 能力，为不同场景输出最贴合业务的数字人解决方案</p>
+  </div>
+
+  <div class="cap-grid">
+    <div class="cap-card reveal">
+      <div class="cap-circle" style="background: linear-gradient(135deg, #dbeafe, #c7d2fe)">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#5b8def" stroke-width="2"><circle cx="24" cy="18" r="7"/><path d="M10 40c0-7 6-12 14-12s14 5 14 12"/></svg>
+      </div>
+      <h3>超写实形象</h3>
+      <p>毫米级细节还原皮肤、毛发与微表情，呈现近乎真人的视觉真实感。</p>
+    </div>
+
+    <div class="cap-card reveal">
+      <div class="cap-circle" style="background: linear-gradient(135deg, #fce7f3, #fbcfe8)">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#ec4899" stroke-width="2"><path d="M8 24c0-9 7-16 16-16s16 7 16 16-7 16-16 16"/><path d="M16 24h16M24 16v16"/></svg>
+      </div>
+      <h3>多模态交互</h3>
+      <p>语音、文本、表情、动作多通道融合，让对话变得自然且富有节奏感。</p>
+    </div>
+
+    <div class="cap-card reveal">
+      <div class="cap-circle" style="background: linear-gradient(135deg, #ddd6fe, #c4b5fd)">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#8b5cf6" stroke-width="2"><rect x="8" y="10" width="32" height="28" rx="4"/><path d="M16 22h16M16 30h12"/></svg>
+      </div>
+      <h3>智能内容驱动</h3>
+      <p>对接业务系统与知识库，数字人即开即用，无需复杂技术接入。</p>
+    </div>
+
+    <div class="cap-card reveal">
+      <div class="cap-circle" style="background: linear-gradient(135deg, #cffafe, #a5f3fc)">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M24 6L6 16v16l18 10 18-10V16z"/><path d="M24 6v36"/></svg>
+      </div>
+      <h3>云端实时渲染</h3>
+      <p>低延迟、跨终端，PC、移动、大屏皆可流畅承载实时数字人交互。</p>
+    </div>
+
+    <div class="cap-card reveal">
+      <div class="cap-circle" style="background: linear-gradient(135deg, #fed7aa, #fdba74)">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#f97316" stroke-width="2"><circle cx="24" cy="24" r="16"/><path d="M18 22c1-3 4-3 6 0M24 22c1-3 4-3 6 0M18 30c3 4 9 4 12 0"/></svg>
+      </div>
+      <h3>情感感知引擎</h3>
+      <p>感知用户语气与情绪变化，让数字人的反馈更具同理心。</p>
+    </div>
+
+    <div class="cap-card reveal">
+      <div class="cap-circle" style="background: linear-gradient(135deg, #bbf7d0, #86efac)">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#10b981" stroke-width="2"><rect x="10" y="8" width="28" height="32" rx="4"/><circle cx="24" cy="24" r="6"/></svg>
+      </div>
+      <h3>全终端适配</h3>
+      <p>无缝部署到小程序、APP、网站、智能设备及行业大屏。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 数字人产品矩阵 ========== -->
+<section class="showcase" id="showcase">
+  <div class="section-head reveal">
+    <span class="eyebrow">
+      <span class="eyebrow-line"></span>
+      PRODUCT MATRIX · 数字人矩阵
+    </span>
+    <h2>一个平台，<span class="text-grad-2">无限可能</span></h2>
+  </div>
+
+  <div class="showcase-grid">
+
+    <!-- 大卡片：直播数字人 -->
+    <article class="show-card big reveal">
+      <div class="show-mask">
+        <!-- 这里添加图片：智播数字人主形象，建议 1400×900 -->
+        <div class="img-ph">
+          <span class="ph-circle">
+            <span class="ph-icon">◈</span>
+            <span class="ph-title">这里添加图片</span>
+            <span class="ph-hint">智播 · 主推产品<br/>1400×900</span>
+          </span>
+        </div>
+        <div class="show-tag">FLAGSHIP</div>
+        <div class="show-info-overlay">
+          <h3>智播 · 直播数字人</h3>
+          <p>24 小时不间断的智能主播，赋能直播电商与企业品牌传播。</p>
+          <a href="#contact" class="card-link">了解详情 →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 服务数字人 -->
+    <article class="show-card reveal">
+      <div class="show-mask">
+        <!-- 这里添加图片：智迎服务数字人，建议 700×900 -->
+        <div class="img-ph">
+          <span class="ph-circle">
+            <span class="ph-icon">◈</span>
+            <span class="ph-title">这里添加图片</span>
+            <span class="ph-hint">智迎 · 700×900</span>
+          </span>
+        </div>
+        <div class="show-tag tag-pink">SERVICE</div>
+        <div class="show-info-overlay">
+          <h3>智迎 · 服务数字人</h3>
+          <p>政务大厅、银行网点的智能引导与咨询助手。</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 教学数字人 -->
+    <article class="show-card reveal">
+      <div class="show-mask">
+        <!-- 这里添加图片：智师教学数字人，建议 700×900 -->
+        <div class="img-ph">
+          <span class="ph-circle">
+            <span class="ph-icon">◈</span>
+            <span class="ph-title">这里添加图片</span>
+            <span class="ph-hint">智师 · 700×900</span>
+          </span>
+        </div>
+        <div class="show-tag tag-purple">EDU</div>
+        <div class="show-info-overlay">
+          <h3>智师 · 教学数字人</h3>
+          <p>个性化的 AI 导师，让教育内容生动可感。</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 企业代言数字人（横向大卡） -->
+    <article class="show-card wide reveal">
+      <div class="show-mask">
+        <!-- 这里添加图片：智代企业IP数字人，建议 1400×600 -->
+        <div class="img-ph">
+          <span class="ph-circle">
+            <span class="ph-icon">◈</span>
+            <span class="ph-title">这里添加图片</span>
+            <span class="ph-hint">智代 · 企业代言数字人 · 1400×600</span>
+          </span>
+        </div>
+        <div class="show-tag tag-orange">IP</div>
+        <div class="show-info-overlay">
+          <h3>智代 · 企业代言数字人</h3>
+          <p>专属定制的品牌虚拟 IP，承载企业文化与对外传播。</p>
+          <a href="#contact" class="card-link">了解详情 →</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ========== 应用场景 ========== -->
+<section class="scenarios" id="scenarios">
+  <div class="section-head reveal">
+    <span class="eyebrow">
+      <span class="eyebrow-line"></span>
+      INDUSTRY SCENARIOS · 应用场景
+    </span>
+    <h2>赋能<span class="text-grad">千行百业</span>的数字化升级</h2>
+  </div>
+
+  <div class="scen-tabs reveal">
+    <button class="tab-btn active" data-tab="finance">金融</button>
+    <button class="tab-btn" data-tab="edu">教育</button>
+    <button class="tab-btn" data-tab="gov">政务</button>
+    <button class="tab-btn" data-tab="retail">零售</button>
+    <button class="tab-btn" data-tab="media">传媒</button>
+    <button class="tab-btn" data-tab="health">医疗</button>
+  </div>
+
+  <div class="scen-content reveal">
+
+    <div class="scen-panel active" data-panel="finance">
+      <div class="scen-text">
+        <span class="scen-num">01 / 06</span>
+        <h3>金融行业</h3>
+        <p>构建 7×24 小时智能客户经理，覆盖咨询、引导、营销与风控提示，提升网点服务效率。</p>
+        <ul class="scen-list">
+          <li>智能大堂经理</li>
+          <li>AI 投顾形象</li>
+          <li>远程视频客服</li>
+        </ul>
+        <a href="cases.html" class="link-arrow">查看金融案例 <span>→</span></a>
+      </div>
+      <div class="scen-img">
+        <!-- 这里添加图片：金融场景应用图，建议 900×700 -->
+        <div class="img-ph rounded">
+          <span class="ph-circle">
+            <span class="ph-icon">◈</span>
+            <span class="ph-title">这里添加图片</span>
+            <span class="ph-hint">金融场景 · 900×700</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scen-panel" data-panel="edu">
+      <div class="scen-text">
+        <span class="scen-num">02 / 06</span>
+        <h3>教育行业</h3>
+        <p>打造个性化 AI 教学伙伴，让学习内容更生动、互动更深入。</p>
+        <ul class="scen-list">
+          <li>数字教师</li>
+          <li>语言陪练数字人</li>
+          <li>智慧课堂助手</li>
+        </ul>
+        <a href="cases.html" class="link-arrow">查看教育案例 <span>→</span></a>
+      </div>
+      <div class="scen-img">
+        <!-- 这里添加图片：教育场景图，建议 900×700 -->
+        <div class="img-ph rounded">
+          <span class="ph-circle">
+            <span class="ph-icon">◈</span>
+            <span class="ph-title">这里添加图片</span>
+            <span class="ph-hint">教育场景 · 900×700</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scen-panel" data-panel="gov">
+      <div class="scen-text">
+        <span class="scen-num">03 / 06</span>
+        <h3>政务行业</h3>
+        <p>面向政务大厅与公共服务平台的智能引导、政策解读与办事辅助。</p>
+        <ul class="scen-list">
+          <li>政务智能引导</li>
+          <li>政策解读数字人</li>
+          <li>智慧城市形象</li>
+        </ul>
+        <a href="cases.html" class="link-arrow">查看政务案例 <span>→</span></a>
+      </div>
+      <div class="scen-img">
+        <!-- 这里添加图片：政务场景图，建议 900×700 -->
+        <div class="img-ph rounded">
+          <span class="ph-circle">
+            <span class="ph-icon">◈</span>
+            <span class="ph-title">这里添加图片</span>
+            <span class="ph-hint">政务场景 · 900×700</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scen-panel" data-panel="retail">
+      <div class="scen-text">
+        <span class="scen-num">04 / 06</span>
+        <h3>零售行业</h3>
+        <p>直播电商、品牌推广、门店导购，让数字人成为最高效的销售伙伴。</p>
+        <ul class="scen-list">
+          <li>24h 智能主播</li>
+          <li>数字导购员</li>
+          <li>品牌虚拟代言人</li>
+        </ul>
+        <a href="cases.html" class="link-arrow">查看零售案例 <span>→</span></a>
+      </div>
+      <div class="scen-img">
+        <!-- 这里添加图片：零售场景图，建议 900×700 -->
+        <div class="img-ph rounded">
+          <span class="ph-circle">
+            <span class="ph-icon">◈</span>
+            <span class="ph-title">这里添加图片</span>
+            <span class="ph-hint">零售场景 · 900×700</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scen-panel" data-panel="media">
+      <div class="scen-text">
+        <span class="scen-num">05 / 06</span>
+        <h3>传媒行业</h3>
+        <p>AI 主持人、虚拟记者、新闻播报，重构内容生产与传播链路。</p>
+        <ul class="scen-list">
+          <li>AI 新闻主播</li>
+          <li>短视频内容生成</li>
+          <li>多语种播报</li>
+        </ul>
+        <a href="cases.html" class="link-arrow">查看传媒案例 <span>→</span></a>
+      </div>
+      <div class="scen-img">
+        <!-- 这里添加图片：传媒场景图，建议 900×700 -->
+        <div class="img-ph rounded">
+          <span class="ph-circle">
+            <span class="ph-icon">◈</span>
+            <span class="ph-title">这里添加图片</span>
+            <span class="ph-hint">传媒场景 · 900×700</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scen-panel" data-panel="health">
+      <div class="scen-text">
+        <span class="scen-num">06 / 06</span>
+        <h3>医疗行业</h3>
+        <p>健康咨询、就诊导引、心理陪伴，温度与专业兼备的健康数字人。</p>
+        <ul class="scen-list">
+          <li>智能导诊数字人</li>
+          <li>健康宣教助手</li>
+          <li>AI 心理陪伴</li>
+        </ul>
+        <a href="cases.html" class="link-arrow">查看医疗案例 <span>→</span></a>
+      </div>
+      <div class="scen-img">
+        <!-- 这里添加图片：医疗场景图，建议 900×700 -->
+        <div class="img-ph rounded">
+          <span class="ph-circle">
+            <span class="ph-icon">◈</span>
+            <span class="ph-title">这里添加图片</span>
+            <span class="ph-hint">医疗场景 · 900×700</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== 数据成就 · 浅色卡片 ========== -->
+<section class="achievements">
+  <div class="ach-decor">
+    <div class="ach-blob ach-blob-1"></div>
+    <div class="ach-blob ach-blob-2"></div>
+  </div>
+  <div class="ach-inner">
+    <div class="section-head reveal" style="text-align:left;max-width:none;margin-bottom:60px">
+      <span class="eyebrow">
+        <span class="eyebrow-line"></span>
+        BY THE NUMBERS · 数据见证
+      </span>
+      <h2>领跑行业的<br/><span class="text-grad">实力数据</span></h2>
+    </div>
+
+    <div class="ach-grid">
+      <div class="ach-item reveal">
+        <div class="ach-num"><span data-target="200">0</span><i>+</i></div>
+        <p>企业客户合作</p>
+      </div>
+      <div class="ach-item reveal">
+        <div class="ach-num"><span data-target="1000">0</span><i>+</i></div>
+        <p>数字人项目交付</p>
+      </div>
+      <div class="ach-item reveal">
+        <div class="ach-num"><span data-target="50">0</span><i>+</i></div>
+        <p>行业场景覆盖</p>
+      </div>
+      <div class="ach-item reveal">
+        <div class="ach-num"><span data-target="30">0</span><i>+</i></div>
+        <p>技术专利与著作权</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 合作伙伴 ========== -->
+<section class="partners">
+  <div class="section-head reveal">
+    <span class="eyebrow">
+      <span class="eyebrow-line"></span>
+      PARTNERS · 合作伙伴
+    </span>
+    <h2>与<span class="text-grad-2">行业领先者</span>携手共建</h2>
+  </div>
+  <div class="partner-grid reveal">
+    <!-- 这里添加图片：合作伙伴Logo ×12（建议深灰色单色版本，统一尺寸 200×80） -->
+    <div class="partner-cell">这里添加Logo 1</div>
+    <div class="partner-cell">这里添加Logo 2</div>
+    <div class="partner-cell">这里添加Logo 3</div>
+    <div class="partner-cell">这里添加Logo 4</div>
+    <div class="partner-cell">这里添加Logo 5</div>
+    <div class="partner-cell">这里添加Logo 6</div>
+    <div class="partner-cell">这里添加Logo 7</div>
+    <div class="partner-cell">这里添加Logo 8</div>
+    <div class="partner-cell">这里添加Logo 9</div>
+    <div class="partner-cell">这里添加Logo 10</div>
+    <div class="partner-cell">这里添加Logo 11</div>
+    <div class="partner-cell">这里添加Logo 12</div>
+  </div>
+</section>
+
+<!-- ========== 联系我们 ========== -->
+<section class="contact" id="contact">
+  <div class="contact-card reveal">
+
+    <div class="contact-decor">
+      <div class="cd-blob cd-blob-1"></div>
+      <div class="cd-blob cd-blob-2"></div>
+    </div>
+
+    <div class="contact-left">
+      <span class="eyebrow">
+        <span class="eyebrow-line"></span>
+        GET IN TOUCH · 联系我们
+      </span>
+      <h2>开启您的<br/><span class="text-grad">数字人探索之旅</span></h2>
+      <p class="contact-sub">留下您的需求，我们的方案专家将在 24 小时内与您取得联系。</p>
+
+      <div class="contact-info">
+        <div class="info-row">
+          <div class="info-ico" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">✉</div>
+          <div>
+            <span class="info-label">商务合作</span>
+            <span class="info-val">business@digimeta.com.cn</span>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-ico" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8)">☎</div>
+          <div>
+            <span class="info-label">咨询热线</span>
+            <span class="info-val">400-XXX-XXXX</span>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-ico" style="background:linear-gradient(135deg,#ddd6fe,#c4b5fd)">◎</div>
+          <div>
+            <span class="info-label">公司地址</span>
+            <span class="info-val">北京市 · 朝阳区</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-form" onsubmit="event.preventDefault(); alert('感谢联系，我们将尽快与您取得联系！');">
+      <div class="form-row">
+        <input type="text" placeholder="您的姓名 *" required />
+        <input type="text" placeholder="所在公司 *" required />
+      </div>
+      <div class="form-row">
+        <input type="email" placeholder="邮箱 *" required />
+        <input type="tel" placeholder="电话" />
+      </div>
+      <select required>
+        <option value="">请选择行业 *</option>
+        <option>金融</option><option>教育</option><option>政务</option>
+        <option>零售</option><option>传媒</option><option>医疗</option><option>其他</option>
+      </select>
+      <textarea rows="4" placeholder="请简要描述您的需求"></textarea>
+      <button type="submit" class="btn-primary form-submit">
+        <span>提交需求</span>
+        <span class="arrow">→</span>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- ========== 页脚 ========== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index-light.html" class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="14" stroke="url(#gf)" stroke-width="2.5"/>
+            <circle cx="16" cy="16" r="6" fill="url(#gf)"/>
+            <defs>
+              <linearGradient id="gf" x1="0" y1="0" x2="32" y2="32">
+                <stop offset="0" stop-color="#5b8def"/>
+                <stop offset="1" stop-color="#a855f7"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span>DigiMeta</span>
+          <small>缔智元</small>
+        </div>
+      </a>
+      <p class="brand-desc">让每一次交互都拥有"人"的温度。</p>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <h4>产品</h4>
+        <a href="#showcase">智播 · 直播数字人</a>
+        <a href="#showcase">智迎 · 服务数字人</a>
+        <a href="#showcase">智师 · 教学数字人</a>
+        <a href="#showcase">智代 · 企业代言数字人</a>
+      </div>
+      <div>
+        <h4>解决方案</h4>
+        <a href="#scenarios">金融</a>
+        <a href="#scenarios">教育</a>
+        <a href="#scenarios">政务</a>
+        <a href="#scenarios">零售</a>
+      </div>
+      <div>
+        <h4>关于</h4>
+        <a href="about.html">公司介绍</a>
+        <a href="cases.html">客户案例</a>
+        <a href="#contact">联系我们</a>
+        <a href="#">加入我们</a>
+      </div>
+      <div>
+        <h4>关注我们</h4>
+        <!-- 这里添加图片：微信公众号二维码，建议 160×160 -->
+        <div class="qr-placeholder">
+          <span>这里添加二维码<br/><small>微信公众号</small></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 缔智元科技（北京）有限公司 · DigiMeta Technology</span>
+    <span>京ICP备XXXXXXXX号 · 京公网安备 XXXXXXXXXXXX 号</span>
+  </div>
+</footer>
+
+<script src="script-light.js"></script>
+</body>
+</html>
