@@ -143,3 +143,33 @@
 })();
 
 /* 漂浮卡片已有 CSS 浮动动画，无需额外鼠标跟随 */
+
+/* ============ 7. 服务角色卡片：点击锁定 active + 键盘支持 ============ */
+(function() {
+  const track = document.querySelector('.roles-track');
+  if (!track) return;
+  const cards = track.querySelectorAll('.role-card');
+
+  function activate(target) {
+    cards.forEach(c => c.classList.remove('active'));
+    target.classList.add('active');
+  }
+
+  cards.forEach(card => {
+    // 点击：将该卡片设为默认展开项
+    card.addEventListener('click', (e) => {
+      // 忽略 CTA 链接点击导致的冒泡
+      if (e.target.closest('.role-cta')) return;
+      activate(card);
+    });
+
+    // 键盘：Enter / Space 激活
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        if (e.target.closest('.role-cta')) return;
+        e.preventDefault();
+        activate(card);
+      }
+    });
+  });
+})();

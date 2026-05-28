@@ -1389,3 +1389,413 @@ section.contact {
   .footer-cols { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; text-align: center; }
 }
+
+/* ================================================================
+   服务角色 · 横向联动伸缩卡片组（深色科技风）
+   ================================================================ */
+
+.roles {
+  position: relative;
+  z-index: 2;
+  padding: 140px 32px;
+  background: #070a10;
+  color: #ffffff;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* 深色背景装饰 */
+.roles-bg-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.rdecor {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.45;
+}
+.rdecor-1 {
+  top: -150px; left: 8%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(91, 141, 239, 0.5), transparent 70%);
+}
+.rdecor-2 {
+  bottom: -200px; right: 5%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.4), transparent 70%);
+}
+.rdecor-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(120, 140, 200, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 140, 200, 0.05) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+/* 标题区 */
+.roles-head {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto 70px;
+  text-align: center;
+}
+.roles-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+.re-line {
+  display: inline-block;
+  width: 24px; height: 2px;
+  background: linear-gradient(90deg, #5b8def, #a855f7);
+  border-radius: 2px;
+}
+.roles-title {
+  font-size: clamp(34px, 4.2vw, 54px);
+  font-weight: 800;
+  line-height: 1.18;
+  color: #ffffff;
+  letter-spacing: -1.2px;
+  margin-bottom: 20px;
+}
+.roles-grad {
+  background: linear-gradient(135deg, #6ee7b7 0%, #5b8def 50%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.roles-sub {
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* 卡片轨道 */
+.roles-track {
+  position: relative;
+  z-index: 2;
+  max-width: 1380px;
+  margin: 0 auto;
+  display: flex;
+  gap: 14px;
+  height: 580px;
+  /* GPU 提升，避免子卡片在 flex 动画中抖动 */
+  transform: translateZ(0);
+}
+
+/* 单卡片基础 */
+.role-card {
+  position: relative;
+  flex-grow: 1;
+  flex-basis: 0;
+  flex-shrink: 1;
+  min-width: 170px;
+  border-radius: 32px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #0d1119;
+  outline: none;
+  transition:
+    flex-grow 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: flex-grow, opacity, filter;
+}
+
+/* 默认：首张稍大 */
+.role-card.active { flex-grow: 1.9; }
+
+/* 当组被悬停：所有卡片均压缩变暗（含 active），保留被悬停的那张突出 */
+.roles-track:hover .role-card,
+.roles-track:focus-within .role-card {
+  flex-grow: 1;
+  opacity: 0.55;
+  filter: brightness(0.65) saturate(0.7);
+}
+.roles-track:hover .role-card.active,
+.roles-track:focus-within .role-card.active {
+  flex-grow: 1;
+}
+.roles-track:hover .role-card:hover,
+.roles-track:hover .role-card:focus-visible,
+.roles-track:focus-within .role-card:focus-visible {
+  flex-grow: 2.8;
+  opacity: 1;
+  filter: none;
+  box-shadow:
+    0 0 0 1px rgba(120, 150, 255, 0.25),
+    0 24px 60px rgba(91, 141, 239, 0.28),
+    0 0 100px rgba(168, 85, 247, 0.20);
+}
+
+/* 默认 active 也带柔光（无悬停时） */
+.role-card.active {
+  box-shadow:
+    0 0 0 1px rgba(120, 150, 255, 0.18),
+    0 16px 50px rgba(91, 141, 239, 0.18),
+    0 0 80px rgba(168, 85, 247, 0.15);
+}
+
+/* 背景图层 */
+.role-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.role-card:hover .role-bg {
+  transform: scale(1.06);
+}
+
+/* 图片占位（用户替换为真实图后会自动适配） */
+.role-img-ph {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(91, 141, 239, 0.35) 0%, transparent 50%),
+    radial-gradient(circle at 70% 75%, rgba(168, 85, 247, 0.3) 0%, transparent 50%),
+    linear-gradient(160deg, #131826 0%, #1a1f33 50%, #0f1320 100%);
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  font-size: 12px;
+  padding: 20px;
+}
+.role-ph-mark {
+  font-size: 36px;
+  color: rgba(160, 180, 255, 0.7);
+  text-shadow: 0 0 24px rgba(91, 141, 239, 0.4);
+}
+.role-ph-text { font-size: 13px; font-weight: 600; line-height: 1.6; color: rgba(255, 255, 255, 0.7); }
+.role-ph-text small { display: block; margin-top: 4px; font-size: 10px; color: rgba(255, 255, 255, 0.4); font-weight: 400; }
+
+/* 蒙版（深色渐变保证文字可读） */
+.role-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg,
+      rgba(7, 10, 16, 0.15) 0%,
+      rgba(7, 10, 16, 0.35) 40%,
+      rgba(7, 10, 16, 0.85) 80%,
+      rgba(7, 10, 16, 0.96) 100%);
+  pointer-events: none;
+}
+
+/* 内部光晕（悬停时增强，未悬停淡化） */
+.role-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(circle at 50% 100%, rgba(91, 141, 239, 0.25), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+.role-card.active .role-glow,
+.role-card:hover .role-glow {
+  opacity: 1;
+}
+.roles-track:hover .role-card .role-glow {
+  opacity: 0;
+}
+.roles-track:hover .role-card:hover .role-glow {
+  opacity: 1;
+}
+
+/* 内容 */
+.role-content {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 3;
+  padding: 36px 30px 32px;
+  color: white;
+}
+
+.role-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  background: rgba(110, 231, 183, 0.12);
+  border: 1px solid rgba(110, 231, 183, 0.5);
+  border-radius: 100px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: #6ee7b7;
+  margin-bottom: 18px;
+  text-shadow: 0 0 12px rgba(110, 231, 183, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.role-title-text {
+  font-size: clamp(22px, 1.8vw, 30px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: white;
+  margin-bottom: 18px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* 描述+按钮：默认隐藏，激活/悬停时显示 */
+.role-extra {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s,
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s;
+  pointer-events: none;
+}
+.role-card.active .role-extra {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* 当某张被悬停 → 该卡片显示 extra */
+.role-card:hover .role-extra,
+.role-card:focus-visible .role-extra {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: 0.12s;
+}
+/* 当组被悬停但当前卡片未被悬停 → 隐藏 extra（即使是 active） */
+.roles-track:hover .role-card:not(:hover) .role-extra,
+.roles-track:focus-within .role-card:not(:focus-visible):not(:hover) .role-extra {
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition-delay: 0s;
+}
+
+.role-desc {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 22px;
+  max-width: 360px;
+}
+
+/* CTA：紫蓝渐变胶囊 + 圆形箭头 */
+.role-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 6px 6px 20px;
+  background: linear-gradient(135deg, #5b8def 0%, #8b5cf6 50%, #a855f7 100%);
+  border-radius: 100px;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(91, 141, 239, 0.35);
+}
+.role-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 38px rgba(91, 141, 239, 0.5);
+}
+.role-cta-arrow {
+  width: 30px; height: 30px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #5b8def;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.role-cta:hover .role-cta-arrow {
+  transform: translateX(2px) rotate(-12deg);
+}
+
+/* 响应式：平板降低高度 */
+@media (max-width: 1024px) {
+  .roles { padding: 100px 24px; }
+  .roles-track { height: 520px; gap: 10px; }
+  .role-card { min-width: 130px; border-radius: 26px; }
+  .role-content { padding: 28px 22px 26px; }
+  .role-title-text { font-size: 22px; }
+  .role-desc { font-size: 13px; }
+}
+
+/* 响应式：移动端纵向堆叠，全部展开 */
+@media (max-width: 768px) {
+  .roles { padding: 80px 20px; }
+  .roles-head { margin-bottom: 50px; }
+  .roles-track {
+    flex-direction: column;
+    height: auto;
+    gap: 16px;
+  }
+  .role-card {
+    flex-grow: 1 !important;
+    flex-basis: auto;
+    min-width: 0;
+    min-height: 380px;
+    opacity: 1 !important;
+    filter: none !important;
+    border-radius: 28px;
+    box-shadow:
+      0 0 0 1px rgba(120, 150, 255, 0.12),
+      0 12px 40px rgba(91, 141, 239, 0.15) !important;
+  }
+  .role-card .role-extra {
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+  }
+  .role-card .role-glow { opacity: 1 !important; }
+  .role-bg, .role-card:hover .role-bg { transform: none; }
+  .role-content { padding: 28px 24px 26px; }
+  .role-title-text { font-size: 24px; }
+}
+
+/* prefers-reduced-motion：关闭复杂动效 */
+@media (prefers-reduced-motion: reduce) {
+  .role-card,
+  .role-card .role-bg,
+  .role-card .role-extra,
+  .role-card .role-glow,
+  .role-cta,
+  .role-cta-arrow {
+    transition: none !important;
+    animation: none !important;
+  }
+  .role-card .role-extra {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+  .role-card .role-glow { opacity: 0.6; }
+  .roles-track:hover .role-card,
+  .roles-track:focus-within .role-card {
+    opacity: 1;
+    filter: none;
+  }
+}
+
