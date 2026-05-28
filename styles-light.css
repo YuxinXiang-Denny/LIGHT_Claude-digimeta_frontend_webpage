@@ -47,14 +47,19 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  scroll-padding-top: 100px;
+}
 
 body {
   font-family: var(--font-body);
   background: var(--bg-0);
   color: var(--text-1);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
+  width: 100%;
   /* 保留原生光标，仅添加光晕效果 */
 }
 
@@ -72,6 +77,8 @@ button { font-family: inherit; }
 /* ============ 鼠标光晕（保留原生光标） ============ */
 .cursor-aura {
   position: fixed;
+  left: 50vw;
+  top: 50vh;
   width: 600px; height: 600px;
   pointer-events: none;
   z-index: 1;
@@ -84,6 +91,8 @@ button { font-family: inherit; }
   mix-blend-mode: multiply;
   filter: blur(20px);
   transition: opacity 0.3s;
+  will-change: left, top;
+  opacity: 0;
 }
 
 /* ============ 全局背景 Blob ============ */
@@ -329,14 +338,15 @@ button { font-family: inherit; }
 }
 .hero-decor {
   position: absolute;
-  top: 50%; right: -10%;
+  top: 50%; right: -120px;
   width: 600px; height: 600px;
-  transform: translateY(-50%);
   z-index: 0;
   opacity: 0.5;
+  pointer-events: none;
   animation: slowRotate 60s linear infinite;
 }
 @keyframes slowRotate {
+  from { transform: translateY(-50%) rotate(0deg); }
   to { transform: translateY(-50%) rotate(360deg); }
 }
 
@@ -722,6 +732,8 @@ section.contact {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
+  /* GPU 提升，避免子元素抖动 */
+  transform: translateZ(0);
 }
 .cap-card {
   position: relative;
@@ -729,8 +741,16 @@ section.contact {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+  transform: scale(1);
+  transform-origin: center center;
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 .cap-card::before {
   content: '';
@@ -739,13 +759,24 @@ section.contact {
   width: 200px; height: 200px;
   background: radial-gradient(circle, rgba(168, 85, 247, 0.08), transparent 70%);
   opacity: 0;
-  transition: opacity 0.4s;
+  transition: opacity 0.5s;
   border-radius: 50%;
+  pointer-events: none;
 }
-.cap-card:hover {
-  transform: translateY(-10px);
+/* 组联动：悬停组内任意卡片，其他卡片缩小变淡 */
+.cap-grid:hover .cap-card {
+  transform: scale(0.96);
+  opacity: 0.55;
+  filter: saturate(0.7);
+}
+/* 当前悬停的卡片放大 */
+.cap-grid .cap-card:hover {
+  transform: scale(1.04);
+  opacity: 1;
+  filter: none;
   border-color: transparent;
   box-shadow: var(--shadow-lg);
+  z-index: 2;
 }
 .cap-card:hover::before { opacity: 1; }
 
@@ -782,6 +813,7 @@ section.contact {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  transform: translateZ(0);
 }
 .show-card {
   position: relative;
@@ -789,16 +821,32 @@ section.contact {
   overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--border);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   min-height: 420px;
+  transform: scale(1);
+  transform-origin: center center;
+  transition:
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 .show-card.big { grid-column: span 2; min-height: 520px; }
 .show-card.wide { grid-column: span 3; min-height: 380px; }
 
-.show-card:hover {
-  transform: translateY(-8px);
+/* 组联动 */
+.showcase-grid:hover .show-card {
+  transform: scale(0.97);
+  opacity: 0.6;
+  filter: saturate(0.75);
+}
+.showcase-grid .show-card:hover {
+  transform: scale(1.02);
+  opacity: 1;
+  filter: none;
   box-shadow: var(--shadow-lg);
+  z-index: 2;
 }
 
 .show-mask {
@@ -1023,6 +1071,7 @@ section.contact {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
+  transform: translateZ(0);
 }
 .ach-item {
   background: rgba(255, 255, 255, 0.7);
@@ -1031,12 +1080,24 @@ section.contact {
   border-radius: var(--radius-xl);
   padding: 50px 32px;
   text-align: left;
-  transition: all 0.4s;
+  transform: scale(1);
+  transition:
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.55s,
+    box-shadow 0.55s;
+  will-change: transform, opacity;
 }
-.ach-item:hover {
-  transform: translateY(-6px);
-  background: rgba(255, 255, 255, 0.9);
+.ach-grid:hover .ach-item {
+  transform: scale(0.97);
+  opacity: 0.65;
+}
+.ach-grid .ach-item:hover {
+  transform: scale(1.04);
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.95);
   box-shadow: var(--shadow-lg);
+  z-index: 2;
 }
 .ach-num {
   display: flex;
@@ -1067,6 +1128,7 @@ section.contact {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 16px;
+  transform: translateZ(0);
 }
 .partner-cell {
   aspect-ratio: 5 / 2;
@@ -1081,14 +1143,26 @@ section.contact {
   border: 1px solid var(--border-soft);
   text-align: center;
   padding: 12px;
-  transition: all 0.3s;
+  transform: scale(1);
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.5s,
+    box-shadow 0.5s,
+    color 0.5s;
 }
-.partner-cell:hover {
+.partner-grid:hover .partner-cell {
+  transform: scale(0.96);
+  opacity: 0.5;
+}
+.partner-grid .partner-cell:hover {
   background: white;
   border-color: var(--border);
-  box-shadow: var(--shadow-soft);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  transform: scale(1.06);
+  opacity: 1;
   color: var(--text-1);
+  z-index: 2;
 }
 
 /* ============ 联系我们 ============ */

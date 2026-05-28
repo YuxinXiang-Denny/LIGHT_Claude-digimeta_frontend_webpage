@@ -11,10 +11,18 @@
 
   let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
   let curX = mouseX, curY = mouseY;
+  let firstMove = true;
 
   window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
+    if (firstMove) {
+      // 首次移动时让光晕立即出现在鼠标位置（避免从中央飘过来）
+      curX = mouseX;
+      curY = mouseY;
+      aura.style.opacity = '1';
+      firstMove = false;
+    }
   });
 
   function follow() {
@@ -26,7 +34,7 @@
   }
   follow();
 
-  // 离开页面时降低透明度
+  // 离开/进入页面时切换透明度
   document.addEventListener('mouseleave', () => aura.style.opacity = '0');
   document.addEventListener('mouseenter', () => aura.style.opacity = '1');
 })();
@@ -104,58 +112,34 @@
   });
 })();
 
-/* ============ 6. 卡片 3D 倾斜 ============ */
-(function() {
-  if (window.matchMedia('(hover: none)').matches) return;
-  const cards = document.querySelectorAll('.cap-card, .show-card, .ach-item, .float-card');
-  cards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const cx = rect.width / 2;
-      const cy = rect.height / 2;
-      const rx = ((y - cy) / cy) * -3;
-      const ry = ((x - cx) / cx) * 3;
-      const baseTransform = card.classList.contains('float-card') ? card.style.transform.split('rotateX')[0] : '';
-      card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-8px)`;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
-  });
-})();
-
-/* ============ 7. Hero 视差 ============ */
-(function() {
-  const heroVisual = document.querySelector('.hero-visual');
-  if (!heroVisual) return;
-  if (window.innerWidth < 768) return;
-
-  window.addEventListener('mousemove', (e) => {
-    const rect = heroVisual.getBoundingClientRect();
-    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
-    heroVisual.style.transform = `translate(${x}px, ${y}px)`;
-  });
-})();
-
-/* ============ 8. 漂浮卡片轻微跟随鼠标 ============ */
+/* ============ 6. Hero 视差（节流 RAF，仅影响装饰元素） ============ */
 (function() {
   if (window.innerWidth < 768) return;
-  const cards = document.querySelectorAll('.float-card, .float-tag, .orbit-dot');
-  cards.forEach((c, i) => {
-    const speed = (i % 3 + 1) * 0.5;
-    c.dataset.speed = speed;
-  });
+  const decor = document.querySelector('.hero-decor');
+  if (!decor) return;
+
+  let targetX = 0, targetY = 0, curX = 0, curY = 0;
+  let ticking = false;
+
   window.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5);
-    const y = (e.clientY / window.innerHeight - 0.5);
-    cards.forEach(c => {
-      const s = parseFloat(c.dataset.speed) || 1;
-      c.style.setProperty('--mx', `${x * s * 10}px`);
-      c.style.setProperty('--my', `${y * s * 10}px`);
-    });
+    targetX = (e.clientX / window.innerWidth - 0.5) * 30;
+    targetY = (e.clientY / window.innerHeight - 0.5) * 30;
+    if (!ticking) {
+      requestAnimationFrame(updateDecor);
+      ticking = true;
+    }
   });
+
+  function updateDecor() {
+    curX += (targetX - curX) * 0.08;
+    curY += (targetY - curY) * 0.08;
+    decor.style.translate = `${curX}px ${curY}px`;
+    if (Math.abs(targetX - curX) > 0.1 || Math.abs(targetY - curY) > 0.1) {
+      requestAnimationFrame(updateDecor);
+    } else {
+      ticking = false;
+    }
+  }
 })();
+
+/* 漂浮卡片已有 CSS 浮动动画，无需额外鼠标跟随 */
